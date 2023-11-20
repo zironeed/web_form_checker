@@ -2,9 +2,9 @@ import re
 
 
 def type_checker(value):
-    phone_pattern = r'7\d{10}$'
+    phone_pattern = [r'7\d{10}$', r'\+7\d{10}$']
     value_without_spaces = value.replace(" ", "")
-    if re.match(phone_pattern, value_without_spaces):
+    if re.match(phone_pattern[0], value_without_spaces) or re.match(phone_pattern[1], value_without_spaces):
         return 'phone'
     elif re.match(r"[^@]+@[^@]+\.[^@]+", value_without_spaces):
         return 'email'

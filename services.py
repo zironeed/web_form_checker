@@ -28,3 +28,24 @@ def validator(data):
                 data[key] = type_checker(val)
 
     return data
+
+
+def template_finder(templates, data):
+    form_types = ['date', 'phone', 'email', 'text']
+
+    for template in templates:
+        template_fields = template['fields']
+        template_len = len(template_fields.values())
+        coincidence = 0
+
+        if template_fields.keys() != data.keys():
+            continue
+
+        for form_type in form_types:
+            if form_type in data.values():
+                coincidence += 1
+
+        if coincidence == template_len:
+            return template["template_name"]
+
+    return data
